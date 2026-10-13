@@ -3,295 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Coli 🤍</title>
-    
-    <!-- Tailwind CSS -->
+    <title>For Coli 🩵</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Dancing Script for romantic headings, Quicksand for soft body text -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Phosphor Icons for aesthetic, soft icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #fff0f3 0%, #ffe4e6 100%);
-            min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
         }
-
-        h1, h2, h3, .romantic-font {
-            font-family: 'Dancing Script', cursive;
-        }
-
-        /* Floating background hearts animation */
+        
+        /* Floating Blue Hearts Animation */
         .heart-float {
             position: fixed;
             bottom: -10vh;
-            color: #fb7185; /* Tailwind rose-400 */
-            opacity: 0.3;
+            color: #60a5fa; /* Tailwind blue-400 */
+            opacity: 0.4;
             animation: floatUp linear infinite;
             z-index: 0;
             pointer-events: none;
         }
-
+        
         @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg) scale(0.8);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.4;
-            }
-            90% {
-                opacity: 0.4;
-            }
-            100% {
-                transform: translateY(-110vh) rotate(360deg) scale(1.2);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            20% { opacity: 0.4; }
+            80% { opacity: 0.4; }
+            100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
         }
 
-        /* Explosion hearts animation */
-        .burst-heart {
+        /* Explosion Hearts */
+        .explode-heart {
             position: absolute;
+            animation: explodeOut 1s ease-out forwards;
             pointer-events: none;
             z-index: 50;
-            animation: burst 1s ease-out forwards;
         }
 
-        @keyframes burst {
-            0% {
-                transform: translate(0, 0) scale(0.5);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--rot));
-                opacity: 0;
-            }
+        @keyframes explodeOut {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0; }
         }
 
-        /* Glassmorphism utility */
+        /* Glassmorphism Card */
         .glass-card {
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 32px 0 rgba(251, 113, 133, 0.15);
-        }
-
-        /* Music Player Progress Animation */
-        @keyframes progress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-        .progress-bar-animate {
-            animation: progress 240s linear infinite; /* Approximate length of the song */
-            animation-play-state: paused;
-        }
-        .playing .progress-bar-animate {
-            animation-play-state: running;
-        }
-        
-        .spin-record {
-            animation-play-state: paused;
-        }
-        .playing .spin-record {
-            animation-play-state: running;
-        }
-
-        /* Mobile specific CSS optimizations */
-        @media (max-width: 640px) {
-            .glass-card {
-                backdrop-filter: blur(8px);
-                -webkit-backdrop-filter: blur(8px);
-                box-shadow: 0 4px 16px 0 rgba(251, 113, 133, 0.1);
-            }
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
-<body class="text-gray-800 antialiased selection:bg-pink-200 selection:text-pink-900 overflow-x-hidden">
+<body class="bg-gradient-to-br from-sky-50 to-blue-100 min-h-screen flex items-center justify-center p-4 relative">
 
-    <!-- Hidden Audio Element -->
-    <audio id="bgMusic" loop>
+    <!-- Hidden Audio Player (No loop) -->
+    <audio id="bgMusic">
         <source src="aphrodite.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
 
-    <!-- Background Container for Floating Hearts -->
-    <div id="background-hearts" class="fixed inset-0 pointer-events-none z-0"></div>
+    <!-- Main Content Container -->
+    <div class="max-w-md w-full relative z-10 flex flex-col gap-6">
+        
+        <!-- Header -->
+        <div class="text-center">
+            <h1 class="text-4xl font-bold text-blue-600 mb-2 drop-shadow-sm">Hi, Coli 🩵</h1>
+            <p class="text-blue-500 font-medium text-sm">I made something special just for you.</p>
+        </div>
 
-    <!-- Main Content Wrapper -->
-    <div class="relative z-10 container mx-auto px-4 py-8 md:py-12 max-w-4xl flex flex-col items-center">
-
-        <!-- Hero Section -->
-        <header class="text-center mb-16 md:mb-20 pt-6 md:pt-10 px-2">
-            <div class="inline-block mb-3 md:mb-4 p-2 md:p-3 rounded-full bg-white/50 backdrop-blur-sm text-rose-500 shadow-sm">
-                <i class="ph-fill ph-sparkle text-2xl md:text-3xl"></i>
+        <!-- Music Player Card -->
+        <div class="glass-card rounded-2xl p-5 shadow-lg shadow-blue-300/40 text-center flex flex-col items-center">
+            <div class="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center mb-3 shadow-inner">
+                <span class="text-3xl">🦋</span>
             </div>
-            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-rose-500 mb-3 md:mb-4 tracking-wide drop-shadow-sm">
-                Hi, Coli 🤍
-            </h1>
-            <p class="text-base sm:text-lg md:text-xl text-rose-800/80 max-w-lg mx-auto font-medium px-2">
-                Just a little something I made because you've been on my mind. 
-                I wanted to create a tiny corner of the internet just for you.
-            </p>
-        </header>
+            <h2 class="text-lg font-bold text-blue-700">Aphrodite</h2>
+            <p class="text-sm text-blue-500 mb-4">The Ridleys</p>
+            <button id="playBtn" class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 shadow-md shadow-blue-300/50 transform hover:scale-105 active:scale-95">
+                ▶️ Play Aphrodite
+            </button>
+        </div>
 
-        <!-- Reasons Why Section -->
-        <section class="w-full mb-16 md:mb-24">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl text-center text-rose-500 mb-8 md:mb-10 px-2">A Few Reasons Why You're Amazing</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-                <!-- Card 1 -->
-                <div class="glass-card rounded-3xl p-6 md:p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-default group">
-                    <div class="w-14 h-14 md:w-16 md:h-16 mx-auto bg-pink-100 rounded-2xl flex items-center justify-center text-pink-500 text-2xl md:text-3xl mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="ph-fill ph-star"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl text-rose-600 mb-2 md:mb-3 font-bold">Your Energy</h3>
-                    <p class="text-gray-600 text-sm md:text-base leading-relaxed">
-                        You have this incredible way of lighting up a room. Even on ordinary days, your presence makes everything feel a little bit brighter.
-                    </p>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="glass-card rounded-3xl p-6 md:p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-default group">
-                    <div class="w-14 h-14 md:w-16 md:h-16 mx-auto bg-rose-100 rounded-2xl flex items-center justify-center text-rose-500 text-2xl md:text-3xl mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="ph-fill ph-smiley-wink"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl text-rose-600 mb-2 md:mb-3 font-bold">Your Smile</h3>
-                    <p class="text-gray-600 text-sm md:text-base leading-relaxed">
-                        It is genuinely my favorite view. Whenever you smile or laugh, it is impossible not to smile right back at you.
-                    </p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="glass-card rounded-3xl p-6 md:p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-default group">
-                    <div class="w-14 h-14 md:w-16 md:h-16 mx-auto bg-red-100 rounded-2xl flex items-center justify-center text-red-400 text-2xl md:text-3xl mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="ph-fill ph-heart"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl text-rose-600 mb-2 md:mb-3 font-bold">Just You</h3>
-                    <p class="text-gray-600 text-sm md:text-base leading-relaxed">
-                        You are kind, smart, and wonderfully unique. There is nobody else quite like you, Coli, and that is what makes you so special.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Our Soundtrack Section -->
-        <section class="w-full max-w-md mx-auto mb-16 md:mb-24 px-2">
-            <h2 class="text-3xl sm:text-4xl text-center text-rose-500 mb-6 md:mb-8">Our Soundtrack</h2>
-            
-            <div id="player-container" class="glass-card rounded-[2rem] p-5 md:p-6 shadow-xl">
-                <!-- Record/Cover Art -->
-                <div class="w-full aspect-square rounded-2xl bg-gradient-to-tr from-pink-200 to-rose-100 mb-6 flex items-center justify-center shadow-inner relative overflow-hidden group">
-                    <!-- Spinning record effect -->
-                    <div class="spin-record w-32 h-32 rounded-full bg-gray-800 flex items-center justify-center animate-[spin_10s_linear_infinite]">
-                        <div class="w-10 h-10 rounded-full bg-rose-200 border-4 border-gray-900"></div>
-                        <!-- Record grooves -->
-                        <div class="absolute inset-2 rounded-full border border-gray-700/50"></div>
-                        <div class="absolute inset-6 rounded-full border border-gray-700/50"></div>
-                    </div>
-                    
-                    <!-- Decorative overlay -->
-                    <i class="ph-fill ph-music-notes absolute top-4 right-4 text-rose-300 text-2xl"></i>
-                </div>
-
-                <!-- Track Info -->
-                <div class="text-center mb-6">
-                    <h3 class="text-3xl text-gray-800 font-bold mb-1">Aphrodite</h3>
-                    <p class="text-pink-500 font-medium text-sm tracking-widest uppercase">The Ridleys</p>
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="w-full mb-6">
-                    <div class="h-1.5 w-full bg-pink-100 rounded-full overflow-hidden">
-                        <div class="h-full bg-rose-400 rounded-full progress-bar-animate"></div>
-                    </div>
-                </div>
-
-                <!-- Controls -->
-                <div class="flex justify-center items-center gap-6 text-gray-600">
-                    <button id="playBtn" class="w-14 h-14 md:w-16 md:h-16 bg-rose-400 text-white rounded-full flex items-center justify-center hover:bg-rose-500 hover:scale-105 transition-all shadow-md shadow-rose-200 z-20 relative">
-                        <i id="playIcon" class="ph-fill ph-play text-2xl md:text-3xl ml-1"></i>
-                    </button>
-                </div>
-            </div>
-        </section>
+        <!-- Sweet Notes Card -->
+        <div class="glass-card rounded-2xl p-6 shadow-lg shadow-blue-300/40">
+            <h3 class="text-xl font-bold text-blue-700 mb-4 text-center">Why You're Amazing 💙</h3>
+            <ul class="space-y-3 text-blue-800 text-sm font-medium">
+                <li class="flex items-start gap-2">
+                    <span class="text-blue-400 mt-0.5">🩵</span>
+                    You make everything in my life brighter and better.
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-blue-400 mt-0.5">🩵</span>
+                    You have the most beautiful smile.
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-blue-400 mt-0.5">🩵</span>
+                    You are always there to support me.
+                </li>
+            </ul>
+        </div>
 
         <!-- Secret Message Section -->
-        <section class="w-full text-center pb-16 md:pb-20 relative px-2">
-            <div id="secret-container" class="relative z-20 w-full flex justify-center">
-                <button id="secret-btn" class="bg-gradient-to-r from-rose-400 to-pink-500 text-white px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-base md:text-lg shadow-lg shadow-pink-300/50 hover:shadow-pink-300/80 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 md:gap-3 w-[90%] max-w-xs justify-center active:scale-95">
-                    <i class="ph-fill ph-lock-key text-xl"></i>
-                    <span class="truncate">Wanna know a secret?</span>
-                </button>
-            </div>
-
-            <!-- Hidden Message Container -->
-            <div id="hidden-message" class="hidden opacity-0 transition-opacity duration-1000 glass-card w-full max-w-lg mx-auto rounded-3xl p-6 md:p-10 mt-6 md:mt-8 relative overflow-hidden">
-                <i class="ph-fill ph-quotes text-3xl md:text-4xl text-rose-200 absolute top-4 left-4"></i>
-                <h3 class="text-3xl md:text-4xl text-rose-500 mb-3 md:mb-4 mt-2">The Secret...</h3>
-                <p class="text-base md:text-lg text-gray-700 leading-relaxed font-medium">
-                    I just really like you, Coli. You make everything better just by being you. 
-                    I hope this little page made you smile today. ❤️
+        <div class="text-center mt-2">
+            <button id="secretBtn" class="text-blue-500 hover:text-blue-700 font-bold text-sm underline transition-colors relative">
+                Tap here for a secret message
+            </button>
+            
+            <div id="secretMessage" class="hidden mt-6 glass-card rounded-2xl p-6 shadow-lg shadow-blue-300/50 transform transition-all duration-500">
+                <p class="text-blue-800 text-sm leading-relaxed italic">
+                    "I usually spend my time wiring up circuits, writing firmware, and trying to make hardware work, but building this for you has easily been my favorite project. I wanted to make something unique just to remind you how much you mean to me. You are my own Aphrodite. I love you, Coli."<br><br>
+                    — Love, Cedric 💙
                 </p>
-                <div class="mt-5 md:mt-6 flex justify-center gap-2 text-rose-400">
-                    <i class="ph-fill ph-heart"></i>
-                    <i class="ph-fill ph-heart"></i>
-                    <i class="ph-fill ph-heart"></i>
-                </div>
             </div>
-        </section>
+        </div>
 
     </div>
 
     <script>
-       const bgMusic = document.getElementById('bgMusic');
-  const playBtn = document.getElementById('playBtn'); 
-  let isPlaying = false;
+        // --- Floating Hearts Background ---
+        const hearts = ['💙', '🩵', '✨'];
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-float', 'text-2xl');
+            heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 5 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 8000);
+        }
+        setInterval(createFloatingHeart, 500);
 
-  // Function to start music and update the button text
-  function startMusic() {
-    if (!isPlaying) {
-      // The code attempts to play the music
-      bgMusic.play().then(() => {
-        isPlaying = true;
-        playBtn.innerHTML = "⏸️ Pause"; // Automatically updates button when music starts
-      }).catch((err) => {
-        // If the browser blocks autoplay, it silently waits for her to tap the screen
-        console.log("Browser waiting for tap.");
-      });
-    }
-  }
+        // --- Audio Logic with 3-Second Timer & No Loop ---
+        const bgMusic = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn'); 
+        let isPlaying = false;
 
-  // Timer: Wait exactly 3 seconds (3000 milliseconds) after page loads to try playing
-  setTimeout(() => {
-    startMusic();
-  }, 3000);
+        function startMusic() {
+            if (!isPlaying) {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    playBtn.innerHTML = "⏸️ Pause"; 
+                }).catch((err) => {
+                    console.log("Browser waiting for tap.");
+                });
+            }
+        }
 
-  // Backup: If the 3-second timer is blocked, play instantly on her first tap anywhere
-  document.body.addEventListener('click', () => {
-    startMusic();
-  }, { once: true }); 
+        // Try to play automatically after 3 seconds
+        setTimeout(() => {
+            startMusic();
+        }, 3000);
 
-  // Make sure the Play/Pause button still works manually
-  playBtn.addEventListener('click', (event) => {
-    event.stopPropagation(); // Prevents this click from triggering the body click twice
-    if (isPlaying) {
-      bgMusic.pause();
-      playBtn.innerHTML = "▶️ Play Aphrodite";
-    } else {
-      bgMusic.play();
-      playBtn.innerHTML = "⏸️ Pause";
-    }
-    isPlaying = !isPlaying;
-  });
+        // Fallback: If blocked, play instantly on first tap
+        document.body.addEventListener('click', () => {
+            startMusic();
+        }, { once: true }); 
+
+        // Play/Pause Button Logic
+        playBtn.addEventListener('click', (event) => {
+            event.stopPropagation(); 
+            if (isPlaying) {
+                bgMusic.pause();
+                playBtn.innerHTML = "▶️ Play Aphrodite";
+            } else {
+                bgMusic.play();
+                playBtn.innerHTML = "⏸️ Pause";
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Reset button when song finishes
+        bgMusic.addEventListener('ended', () => {
+            isPlaying = false;
+            playBtn.innerHTML = "▶️ Play Aphrodite";
+        });
+
+        // --- Secret Message & Heart Explosion ---
+        const secretBtn = document.getElementById('secretBtn');
+        const secretMessage = document.getElementById('secretMessage');
+
+        secretBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevents double-triggering the body click
+            
+            // Toggle message visibility
+            if (secretMessage.classList.contains('hidden')) {
+                secretMessage.classList.remove('hidden');
+                secretBtn.innerText = "Hide secret message";
+                
+                // Create explosion of blue hearts
+                for(let i = 0; i < 20; i++) {
+                    const spark = document.createElement('div');
+                    spark.classList.add('explode-heart', 'text-2xl');
+                    spark.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+                    
+                    // Random angles for explosion
+                    const angle = Math.random() * Math.PI * 2;
+                    const velocity = 50 + Math.random() * 100;
+                    const tx = Math.cos(angle) * velocity + 'px';
+                    const ty = Math.sin(angle) * velocity + 'px';
+                    
+                    spark.style.setProperty('--tx', tx);
+                    spark.style.setProperty('--ty', ty);
+                    spark.style.left = e.clientX + 'px';
+                    spark.style.top = e.clientY + 'px';
+                    
+                    document.body.appendChild(spark);
+                    setTimeout(() => spark.remove(), 1000);
+                }
+            } else {
+                secretMessage.classList.add('hidden');
+                secretBtn.innerText = "Tap here for a secret message";
+            }
+        });
     </script>
 </body>
 </html>
